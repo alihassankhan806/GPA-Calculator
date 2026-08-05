@@ -1,0 +1,86 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Professional GPA Calculator</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.28/jspdf.plugin.autotable.min.js"></script>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div class="header">
+  <h1 style="margin:0;">GPA Calculator</h1>
+  <button class="theme-toggle" onclick="toggleTheme()">🌙</button>
+</div>
+
+<div class="container">
+  <p class="subtitle">Enter Details → Add Subjects → Get GPA + Download PDF</p>
+
+  <!-- STEP 1 -->
+  <div class="step active" id="step1">
+    <h3>Step 1: Student Details</h3>
+    <div class="student-details">
+      <div class="form-group">
+        <label>Student Name</label>
+        <input type="text" id="studentName" placeholder="e.g. xyz">
+      </div>
+      <div class="form-group">
+        <label>Roll No / ID</label>
+        <input type="text" id="rollNo" placeholder="e.g. CSC-00F-000">
+      </div>
+      <div class="form-group">
+        <label>Semester</label>
+        <input type="text" id="semester" placeholder="e.g. Fall 2025">
+      </div>
+      <div class="form-group">
+        <label>Number of Subjects</label>
+        <input type="number" id="numSubjects" placeholder="e.g. 5" min="1" max="15">
+      </div>
+    </div>
+    <div class="btn-group">
+      <button class="btn btn-primary" onclick="generateSubjects()">Next: Add Subjects</button>
+    </div>
+  </div>
+
+  <!-- STEP 2 -->
+  <div class="step" id="step2">
+    <h3>Step 2: Enter Subject Marks</h3>
+    <div class="subject-header">
+      <div>Subject Name</div>
+      <div>Marks</div>
+      <div>Credits</div>
+      <div>Grade</div>
+      <div>GP</div>
+      <div>Action</div>
+    </div>
+    <div id="subjectsContainer"></div>
+    <div class="btn-group">
+      <button class="btn btn-secondary" onclick="goToStep(1)">← Back</button>
+      <button class="btn btn-primary" onclick="calculateGPA()">Calculate GPA</button>
+    </div>
+  </div>
+
+  <!-- STEP 3 -->
+  <div class="step" id="step3">
+    <div class="result-card">
+      <div class="result-details">
+        <p><b>Student Name:</b> <span id="resName">-</span></p>
+        <p><b>Roll No:</b> <span id="resRoll">-</span></p>
+        <p><b>Semester:</b> <span id="resSem">-</span></p>
+      </div>
+      <p>Total Credit Hours: <b id="resCredits">0</b></p>
+      <h2>GPA: <span id="resGPA">0.00</span> / 4.00</h2>
+    </div>
+
+    <div class="btn-group">
+      <button class="btn btn-secondary" onclick="goToStep(2)">← Back</button>
+      <button class="btn btn-success" onclick="generatePDF()">📄 Download PDF</button>
+      <button class="btn btn-primary" onclick="resetAll()">New Calculation</button>
+    </div>
+  </div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
